@@ -18,9 +18,7 @@
     <div id="header-wrapper">
         <header id="header">
             <h1 id="logo"><a href="/">Yiner in Python</a></h1>
-
             <p class="description">Python Linux web安全</p>
-
             <p class="socialmedia">
                 <a href="https://github.com/Yiner/aboutme" title="关于我" rel="me"><img src="/img/yiner.png" alt="关于我"
                                                                                      height="24" width="24">About Yiner</a>
@@ -36,8 +34,25 @@
         <section id="content">
             <article class="post">
                 <h2 class="post-title">{{ page.title}}</h2>
+                <p class="post-date"><span class="year">{{ post.date | date: "%Y" }}</span>
+                    <span class="month">{{ post.date | date: "%M" }}</span>
+                    <span class="day">{{ post.date | date: "%D" }}</span>
+                </p>
                 <section class="article-content">{{ content }}</section>
             </article>
+            <div class="ds-thread" data-title="{{ page.title }}"></div>
+            <script type="text/javascript">
+                var duoshuoQuery = {short_name: "pyiner"};
+                (function () {
+                    var ds = document.createElement('script');
+                    ds.type = 'text/javascript';
+                    ds.async = true;
+                    ds.src = 'http://static.duoshuo.com/embed.js';
+                    ds.charset = 'UTF-8';
+                    (document.getElementsByTagName('head')[0]
+                            || document.getElementsByTagName('body')[0]).appendChild(ds);
+                })();
+            </script>
         </section>
         <section id="sidebar">
             <section id="online_visitors" class="widget">
@@ -100,7 +115,6 @@
                 </ul>
             </section>
         </section>
-
     </div>
 </div>
 <section style="display: none">
