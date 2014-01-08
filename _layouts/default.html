@@ -35,8 +35,9 @@
             <article class="post">
                 <h2 class="post-title">{{ page.title}}</h2>
                 <p class="post-date"><span class="year">{{ page.date | date: "%Y" }}</span>
-                    <span class="month">{{ page.date | date: "%M" }}</span>
-                    <span class="day">{{ page.date | date: "%D" }}</span>
+                    <span class="month">{{ page.date | date: "%B" }}</span>
+                    <span class="day">{{ page.date | date: "%-d" }}</span>
+                    <span class="postcomment"></span>
                 </p>
                 <section class="article-content">{{ content }}</section>
             </article>
