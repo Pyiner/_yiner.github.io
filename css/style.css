@@ -613,7 +613,7 @@ article.post:hover .post-data {
 	cursor: pointer;
 }
 body {
-	background:rgba(67, 62, 121, 0.91) url(/static/img/122.png) fixed ;
+	background:rgba(67, 62, 121, 0.91) url(/img/122.png) fixed ;
 	font: .93em/1.5 Verdana, Arial, "微软雅黑";
 	color: #555;
 	overflow-x: hidden;
