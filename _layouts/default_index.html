@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Yiner in Python</title>
+    <meta charset="utf-8">
+    <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.jpeg"/>
+    <meta name="baidu-tc-verification" content="d48855264c634108ade28f9bffc4079d"/>
+    <link rel=" stylesheet" title="Tomorrow Night" href="/css/tomorrow-night.css" media="screen">
+    <script src="/js/highlight.pack.js"></script>
+    <script>
+        hljs.tabReplace = '';
+        hljs.initHighlightingOnLoad();
+    </script>
+</head>
+<body>
+<div id="wrapper">
+    <div id="header-wrapper">
+        <header id="header">
+            <h1 id="logo"><a href="/">Yiner in Python</a></h1>
+            <p class="description">Python Linux web安全</p>
+            <p class="socialmedia">
+                <a href="https://github.com/Yiner/aboutme" title="关于我" rel="me"><img src="/img/yiner.png" alt="关于我"
+                                                                                     height="24" width="24">About Yiner</a>
+                <a href="mailto:lijiuyang1992@gmail.com" title="Mail to me" rel="me"><img src="/img/email.png"
+                                                                                          alt="Mail to me" height="24"
+                                                                                          width="24">Mail to me</a>
+                <a href="https://github.com/Yiner" title="My Github" rel="me"><img src="/img/github.png" alt="My Github"
+                                                                                   height="24" width="24">My Github</a>
+            </p>
+        </header>
+    </div>
+    <div id="body">
+        <section id="content">
+            <article class="post">
+                <h2 class="post-title">{{ page.title}}</h2>
+                <p class="post-date"><span class="year">{{ page.date | date: "%Y" }}</span>
+                    <span class="month">{{ page.date | date: "%B" }}</span>
+                    <span class="day">{{ page.date | date: "%-d" }}</span>
+                    <span class="postcomment"></span>
+                </p>
+                <p class="post-data">
+            <span class="posttag">标签：
+
+                <a href="#">Python</a>,
+
+            </span>
+        </p>
+                <section class="article-content">{{ content }}</section>
+            </article>
+            <div class="ds-thread" data-title="{{ page.title }}"></div>
+            <script type="text/javascript">
+                var duoshuoQuery = {short_name: "pyiner"};
+                (function () {
+                    var ds = document.createElement('script');
+                    ds.type = 'text/javascript';
+                    ds.async = true;
+                    ds.src = 'http://static.duoshuo.com/embed.js';
+                    ds.charset = 'UTF-8';
+                    (document.getElementsByTagName('head')[0]
+                            || document.getElementsByTagName('body')[0]).appendChild(ds);
+                })();
+            </script>
+        </section>
+        <section id="sidebar">
+            <section id="online_visitors" class="widget">
+                <h4>开源项目</h4>
+                <ul>
+                    <li>
+                        <a href="http://paper.pyiner.com/" target="_blank">博文采集站</a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/Yiner/HTTP-Request-Client" target="_blank">Http Request Client </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/Yiner/Blog" target="_blank">本博客源码</a>
+                    </li>
+                </ul>
+            </section>
+            <section id="online_visitors" class="widget">
+                <h4>最新评论</h4>
+                <ul class="ds-recent-comments" data-num-items="5" data-show-title="1"></ul>
+                <script type="text/javascript">
+                    var duoshuoQuery = {short_name: "pyiner"};
+                    (function () {
+                        var ds = document.createElement('script');
+                        ds.type = 'text/javascript';
+                        ds.async = true;
+                        ds.src = 'http://static.duoshuo.com/embed.js';
+                        ds.charset = 'UTF-8';
+                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+                    })();
+                </script>
+            </section>
+            <section id="online_visitors" class="widget">
+                <h4>友情链接</h4>
+                <ul>
+
+                    <li>
+                        <a href="http://paper.pyiner.com/" target="_blank">博文采集站</a>
+                    </li>
+
+                    <li>
+                        <a href="http://www.wutianqi.com/" target="_blank">Tanky Woo</a>
+                    </li>
+
+                    <li>
+                        <a href="http://blog.yanwen.org/" target="_blank">藏剑山庄</a>
+                    </li>
+
+                    <li>
+                        <a href="http://lihuoqing.cn/" target="_blank">小伙部落</a>
+                    </li>
+
+                    <li>
+                        <a href="http://www.weekyuan.com/" target="_blank">WeekYuan</a>
+                    </li>
+
+                    <li>
+                        <a href="http://jusker.me/" target="_blank">jusker</a>
+                    </li>
+
+                </ul>
+            </section>
+        </section>
+    </div>
+</div>
+<section style="display: none">
+    <script type="text/javascript">
+        var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+        document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F381585bf96b22f0e0011c04516926339' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+</section>
+</body>
+</html>
