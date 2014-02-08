@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/print.css" media="print" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/tomorrow-night.css" media="screen" />
+    <script src="/javascripts/highlight.pack.js"></script>
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <title>CentOS 6.3 Nginx 搭建 Redmine</title>
+    <script>
+        hljs.tabReplace = '';
+        hljs.initHighlightingOnLoad();
+    </script>
+
+  </head>
+
+  <body>
+    <div id="container">
+      <div class="inner">
+
+        <header>
+          <h1>Yiner in Python</h1>
+        </header>
+
+
+        <hr>
+
+        <section id="main_content">
+            <p>安装 Redmine 2.0.3 创建一个安装目录</p>
+
+<pre><code>cd /var/www/</code></pre>
+
+<p>下载 redmine</p>
+
+<pre><code> wget http://rubyforge.org/frs/download.php/76259/redmine-2.0.3.tar.gz</code></pre>
+
+<p>解压</p>
+
+<pre><code>tar -zxvf redmine-2.0.3.tar.gz</code></pre>
+
+<p>重命名</p>
+
+<pre><code> mv /var/www/redmine-2.0.3 /var/www/redmine</code></pre>
+
+<p>删除安装包</p>
+
+<pre><code>rm redmine-2.0.3.tar.gz</code></pre>
+
+<p>回到根目录</p>
+
+<pre><code> cd /</code></pre>
+
+<p>安装需要使用的库</p>
+
+<pre><code>yum -y install zlib-devel curl-devel openssl-devel apr-devel apr-util-devel mysql-devel</code></pre>
+
+<p>安装 Ruby 对于 redmine 2.0.3 我们使用 ruby 1.9.3</p>
+
+<pre><code> wget http://ftp.ruby-lang.org/pub/ruby/stable/ruby-1.9.3-p0.tar.gz</code></pre>
+
+<p>解压</p>
+
+<pre><code> tar -zxvf ruby-1.9.3-p0.tar.gz
+ cd ruby-1.9.3-p0/</code></pre>
+
+<p>编译安装</p>
+
+<pre><code>./configure
+make
+make install</code></pre>
+
+<p>查看版本号</p>
+
+<pre><code>ruby -v</code></pre>
+
+<p>你将会看到</p>
+
+<pre><code>ruby 1.9.3p0 (2011-10-30 revision 33570) [x86_64-linux]</code></pre>
+
+<p>如果运行顺利的话 “RubyGems Install“.</p>
+
+<p>如果出现了问题 ruby -v 不工作</p>
+
+<pre><code># which ruby # TO CHECK WHERE IT SHOULD BE
+# whereis ruby # TO CHECK WHERE IT IS INSTALLED
+which returns like /usr/bin/ along with other directories (where ruby is expected to be), and whereis returns like /usr/local/bin/ruby (thats where ruby actually lies).
+Fix via adding /usr/local/bin to $PATH
+# vi /etc/profile</code></pre>
+
+<p>添加到文件里面去</p>
+
+<pre><code>#Path manupulation
+if[&quot;$EUID&quot;=&quot;0&quot;];then
+pathmunge /sbin
+pathmunge /usr/sbin
+pathmunge /usr/local/sbin
+pathmunge /usr/local/bin # ADDED THIS
+else
+pathmunge /usr/local/bin after # ADDED THIS
+pathmunge /usr/local/sbin after
+pathmunge /usr/sbin after
+pathmunge /sbin
+fi</code></pre>
+
+<p>或者在文件地步添加</p>
+
+<pre><code># nano /etc/profile
+export PATH=&quot;$PATH:/usr/local/bin&quot;</code></pre>
+
+<p>前面的是为root之外的用户，为root添加</p>
+
+<pre><code># nano ~/.bashrc
+export PATH=&quot;$PATH:/usr/local/bin&quot;</code></pre>
+
+<p>重新登录账户以完成更改</p>
+
+<pre><code>Fix via Symlink Creation
+This is not recommended, since if the ruby dependency is broken, others will likely be later on, too. Repair this by adding the folder to the $PATH variable like described before, else gem, rake, bundle, passenger-install-apache2-module will not work either… you would have to create symlinks for them later on, too.
+Symlinks are created like this</code></pre>
+
+<p>链接一下子</p>
+
+<pre><code># ln -s /usr/local/bin/ruby /usr/bin/ruby   </code></pre>
+
+<p>在看看ruby是否工作</p>
+
+<pre><code># which ruby # MUST RETURN PATH TO RUBY
+# ruby -v # MUST RETURN RUBY VERSION
+cd ..
+Now it has to work. When changing $PATH variable, did you log out and log on again with your current user?
+If this does not function properly, other things later on will also not work.</code></pre>
+
+<p>安装 RubyGems 1.8</p>
+
+<pre><code># cd
+# wget http://rubyforge.org/frs/download.php/74806/rubygems-1.8.0.tgz</code></pre>
+
+<p>解压</p>
+
+<pre><code># tar zxvf rubygems-1.8.0.tgz</code></pre>
+
+<p>安装</p>
+
+<pre><code># cd rubygems-1.8.0
+# ruby setup.rb</code></pre>
+
+<p>查看gem是否好使</p>
+
+<pre><code>#gem -v</code></pre>
+
+<p>如果少了YAML的话….</p>
+
+<pre><code>#wget http://pyyaml.org/download/libyaml/yaml-0.1.4.tar.gz
+# ./configure
+# make
+# make install</code></pre>
+
+<p>安装 Phusion Passenger</p>
+
+<pre><code># cd /usr/local/lib/ruby/gems/1.9.1/gems/
+# wget http://rubyforge.org/frs/download.php/76005/passenger-3.0.12.tar.gz
+# tar zxvf passenger-3.0.12.tar.gz
+# cd passenger-3.0.12
+# ./bin/passenger-install-nginx-module</code></pre>
+
+<p>选择1 继续前进 如果少什么库就安一下</p>
+
+<pre><code># nano passenger.conf
+# cd /etc/nginx/conf.d</code></pre>
+
+<p>在nginx的配置文件里添加如下内容：（详情请见nginx.conf）</p>
+
+<pre><code>passenger_root /usr/local/lib/ruby/gems/1.9.1/gems/passenger-3.0.12;
+passenger_ruby /usr/local/bin/ruby;</code></pre>
+
+<p>在server里添加如下内容：（详情请见nginx.conf）</p>
+
+<pre><code>passenger_enabled on;
+passenger_use_global_queue on;</code></pre>
+
+<p>重启 Nginx</p>
+
+<pre><code> /etc/init.d/nginx restart</code></pre>
+
+<p>Redmine Setup # cd /var/www/redmine/</p>
+
+<p>首先安装 bundler</p>
+
+<pre><code># gem install bundler</code></pre>
+
+<p>然后安装gems</p>
+
+<pre><code># bundle install --without development test</code></pre>
+
+<p>我们的用的是mysql 然后把postresql 和 sqlite 都忽略了吧~</p>
+
+<pre><code>bundle install --without development test postgresql sqlite rmagick</code></pre>
+
+<p>如果你没有安装 ImageMagick, 你可以忽略rmagick: ‘bundle install –without development test rmagick’.</p>
+
+<p>如果要安装 ImageMagick 的话。。。</p>
+
+<pre><code>yum install ImageMagick
+yum install ImageMagick-devel</code></pre>
+
+<p>这里还有以一个问题 貌似是没有添加mysql</p>
+
+<pre><code>vi /var/www/redmine/Gemfile</code></pre>
+
+<p>在文件适当的位置添加</p>
+
+<pre><code>gem &quot;mysql&quot; </code></pre>
+
+<p>创建一个数据库</p>
+
+<pre><code>For MySQL:
+create database redmine character set utf8;
+create user 'redmine'@'localhost' identified by'my_password';
+grant all privileges on redmine.* to 'redmine'@'localhost';</code></pre>
+
+<p>Mysql 5.02 之前的版本 最后一句改成这样子</p>
+
+<pre><code>grant all privileges on redmine.* to 'redmine'@'localhost' identified by'my_password';</code></pre>
+
+<p>For PostgreSQL:</p>
+
+<pre><code>CREATE ROLE redmine LOGIN ENCRYPTED PASSWORD 'my_password' NOINHERIT VALID UNTIL 'infinity';
+CREATE DATABASE redmine WITH ENCODING='UTF8' OWNER=redmine;</code></pre>
+
+<p>　　</p>
+
+<p>数据库环境配置</p>
+
+<pre><code># cd config
+# mv database.yml.example database.yml
+# vi database.yml</code></pre>
+
+<p>数据库文件设置：</p>
+
+<pre><code>production:
+adapter: mysql
+database: redmine
+host: localhost
+username: redmine
+password: my_password</code></pre>
+
+<p>　　 如果出现port (3306), 就像下面这样:</p>
+
+<pre><code>production:
+adapter: mysql
+database: redmine
+host: localhost
+port:3307
+username: redmine
+password: my_password
+　　
+Example for a PostgreSQL database (default port):
+production:
+adapter: postgresql
+database:&lt;your_database_name&gt;
+host:&lt;postgres_host&gt;
+username:&lt;postgres_user&gt;
+password:&lt;postgres_user_password&gt;
+encoding: utf8
+schema_search_path:&lt;database_schema&gt;(default-public)
+　　</code></pre>
+
+<p>Generate a session store secret.</p>
+
+<pre><code># cd /var/www/redmine/
+# rake generate_secret_token</code></pre>
+
+<p>创建数据库基本信息 表… # RAILS_ENV=production rake db:migrate It will create tables and an administrator account. 如果出现以下错误</p>
+
+<pre><code>Rake aborted!
+no such file to load — net/https</code></pre>
+
+<p>说明你又少了什么库 然后就再去安装一下吧</p>
+
+<pre><code>you need to install libopenssl-ruby1.8, in Ubuntu, just like this: apt-get install libopenssl-ruby1.8</code></pre>
+
+<p>创建默认数据内容：</p>
+
+<pre><code># RAILS_ENV=production rake redmine:load_default_data</code></pre>
+
+<p>nginx.conf文件的内容：</p>
+
+<pre><code>http {
+    include       mime.types;
+    default_type  application/octet-stream;
+ 
+    #log_format  main  '$remote_addr - $remote_user [$time_local] &quot;$request&quot; '
+    #                  '$status $body_bytes_sent &quot;$http_referer&quot; '
+    #                  '&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;';
+ 
+    #access_log  logs/access.log  main;
+ 
+    passenger_root /usr/local/lib/ruby/gems/1.9.1/gems/passenger-3.0.12;
+    passenger_ruby /usr/local/bin/ruby;
+ 
+    sendfile        on;
+    #tcp_nopush     on;
+ 
+    #keepalive_timeout  0;
+    keepalive_timeout  65;
+ 
+    #gzip  on;
+    server {
+                listen 80;
+ 
+ 
+                server_name nenu.pandawork.net;
+ 
+                root   /var/www/redmine/public;
+ 
+                index index.html index.htm;
+ 
+                passenger_enabled on;
+                passenger_use_global_queue on;
+ 
+                error_page 400 /error/400.html;
+                error_page 401 /error/401.html;
+                error_page 403 /error/403.html;
+                error_page 404 /error/404.html;
+                error_page 405 /error/405.html;
+                error_page 500 /error/500.html;
+                error_page 502 /error/502.html;
+                error_page 503 /error/503.html;
+ 
+                error_log /var/www/redmine/log/production.log;#这个我也不确定 然后就这么写了 日志文件 不影响运行就是了
+               #access_log /var/log/projects.domain.net/access.log combined;
+ 
+ 
+                ## Set the OS file cache.
+                open_file_cache max=3000 inactive=120s;
+                open_file_cache_valid 45s;
+                open_file_cache_min_uses 2;
+                open_file_cache_errors off;
+ 
+        ## Support for favicon. Return an 1x1 transparent GIF if it doesn't
+        ## exist.
+        location = /favicon.ico {
+                expires 30d;
+                try_files /favicon.ico @empty;
+        }
+ 
+                # serve static files directly
+                location ~* ^.+.(jpg|jpeg|gif|css|png|js|ico|html|xml|txt)$ {
+                           access_log           off;
+                }
+ 
+}
+}
+　　</code></pre>
+
+<p>参考文章：http://www.devcu.com/forums/topic/311-install-redmine-203-nginx-centos-6/#entry1373</p>
+        </section>
+
+        <footer>
+          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
+        </footer>
+
+        
+      </div>
+    </div>
+  </body>
+</html>
