@@ -1,9 +1,22 @@
 ---
-layout: default
+layout: default_index.html
 title: 我的Blog
 ---
-<ul>
-    {% for post in site.posts %}   　　　　　　
-    <li>{{ post.date | date_to_string }} <a href="{{ post.url }}">{{ post.title }}</a></li>
-    {% endfor %}　　
-</ul>
+    {% for page in site.posts %}   　　　　　　
+    <section id="content">
+        <article class="post">
+            <h2 class="post-title">{{ page.title}}</h2>
+            <p class="post-date"><span class="year">{{ page.date | date: "%Y" }}</span>
+            <span class="month">{{ page.date | date: "%B" }}</span>
+            <span class="day">{{ page.date | date: "%-d" }}</span>
+            <span class="postcomment"></span>
+             </p>
+                                                                                         <p class="post-data">
+            <span class="posttag">标签：
+
+                                                                                                                                                         <a href="#">Python</a>,
+
+                                                                                                                                                                                                </span>
+                                                                                                                                                                                                        </p>
+                                                                   <section class="article-content">{{ page.content }}</section>                          </article>
+                                                                   {% endfor %}
