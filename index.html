@@ -10,13 +10,10 @@ title: 我的Blog
             <span class="month">{{ page.date | date: "%B" }}</span>
             <span class="day">{{ page.date | date: "%-d" }}</span>
             <span class="postcomment"></span>
-             </p>
-                                                                                         <p class="post-data">
-            <span class="posttag">标签：
-
-                                                                                                                                                         <a href="#">Python</a>,
-
-                                                                                                                                                                                                </span>
-                                                                                                                                                                                                        </p>
-                                                                   <section class="article-content">{{ page.content }}</section>                          </article>
-                                                                   {% endfor %}
+            </p>
+            <p class="post-data">
+            <span class="posttag">标签：</span>                                                                                                                               </p>
+            <section class="article-content">{{ page.content }}</section>                          
+        </article>
+    </section>
+    {% endfor %}
