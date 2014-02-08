@@ -31,22 +31,7 @@
         </header>
     </div>
     <div id="body">
-        <section id="content">
-            <article class="post">
-                <h2 class="post-title">{{ page.title}}</h2>
-                <p class="post-date"><span class="year">{{ page.date | date: "%Y" }}</span>
-                    <span class="month">{{ page.date | date: "%B" }}</span>
-                    <span class="day">{{ page.date | date: "%-d" }}</span>
-                    <span class="postcomment"></span>
-                </p>
-                <p class="post-data">
-            <span class="posttag">标签：
-
-                <a href="#">Python</a>,
-
-            </span>
-        </p>
-                <section class="article-content">{{ content }}</section>
+    {{ content }}
             </article>
             <div class="ds-thread" data-title="{{ page.title }}"></div>
             <script type="text/javascript">
