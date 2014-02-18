@@ -2,7 +2,6 @@
 layout: default_index
 title: 我的Blog
 ---
-    <section id="content">
         {% for page in site.posts %}   　　　　　　
         <article class="post">
             <h2 class="post-title"><a href="{{ page.url }}">{{ page.title }}</a></h2>
@@ -16,4 +15,3 @@ title: 我的Blog
             <section class="article-content">{{ page.content }}</section>                          
         </article>
         {% endfor %}
-    </section>
