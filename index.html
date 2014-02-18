@@ -2,8 +2,8 @@
 layout: default_index
 title: 我的Blog
 ---
-    {% for page in site.posts %}   　　　　　　
     <section id="content">
+        {% for page in site.posts %}   　　　　　　
         <article class="post">
             <h2 class="post-title"><a href="{{ page.url }}">{{ page.title }}</a></h2>
             <p class="post-date"><span class="year">{{ page.date | date: "%Y" }}</span>
@@ -15,5 +15,5 @@ title: 我的Blog
             <span class="posttag">标签：</span>                                                                                                                               </p>
             <section class="article-content">{{ page.content }}</section>                          
         </article>
+        {% endfor %}
     </section>
-    {% endfor %}
