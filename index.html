@@ -53,6 +53,18 @@ title: Yiner in Python
                 <section class="article-content">{{ post.content }}</section>
             </article>
             {% endfor %}
+        <p class="post-nav" style="">
+            {% if paginator.previous_page %}
+                <span class="previous">
+                    <a href="{{ paginator.previous_page_path }}">« 上一页</a>
+                </span>
+            {% endif %}
+            {% if paginator.next_page %}
+                <span class="previous">
+                    <a href="{{ paginator.next_page_path }}">« 下一页</a>
+                </span>
+            {% endif %}
+        </p>
         </section>
         <section id="sidebar">
             <section id="online_visitors" class="widget">
