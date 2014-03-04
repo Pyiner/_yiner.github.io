@@ -34,7 +34,7 @@ title: Yiner in Python
         </header>
     </div>
     <div id="body">
-        <section id="content">
+        <section id="content" style="margin-top:-22px">
             {% for post in paginator.posts %}   　
             <article class="post">
                 <h2 class="post-title"><a href={{ post.url}}>{{ post.title}}</a></h2>
@@ -50,7 +50,7 @@ title: Yiner in Python
 
             </span>
         </p>
-                <section class="article-content" style="margin-top:-22px">{{ post.content }}</section>
+                <section class="article-content" >{{ post.content }}</section>
             </article>
             {% endfor %}
         <p class="post-nav" style="">
