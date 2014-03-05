@@ -2,3 +2,4 @@ baseurl: /
 paginate: 5
 paginate_path: ":num"
 name: "Yiner in Python"
+url: "http://www.pyiner.com"
