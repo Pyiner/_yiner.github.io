@@ -41,6 +41,13 @@ pre code {
   padding: 0.5em;
 }
 
+code {
+  display: block;
+  background: #000000;
+  color: #ffffff;
+  padding: 0.2em;
+}
+
 pre .coffeescript .javascript,
 pre .javascript .xml,
 pre .tex .formula,
