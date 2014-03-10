@@ -23,7 +23,8 @@ Python有个非常好的概念叫做属性(`property`), 它让面向对象编程
     >>> man.temperature
     37
     >>> # get degrees Fahrenheit
-    >>> man.to_fahrenheit()98.60000000000001
+    >>> man.to_fahrenheit()
+    98.60000000000001
 
 额外的小数位是因为Python内部的浮点数算法问题 (在Python解释器中尝试 1.1 + 2.2). 每次我们操作像`temperature`这样的属性，Python会去查找对象的 `__dict__ `字典。就像下面这样
 
