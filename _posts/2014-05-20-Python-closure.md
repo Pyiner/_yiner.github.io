@@ -109,12 +109,12 @@ cell对象有一个cell_contents的熟悉,存储了闭包变量的值
 ##"延迟获取"的闭包##
 使用闭包，还需注意 "延迟获取" 现象。看下面的例子：
 
-    >>> def test():
-    ... for i in range(3):
-    ... def a():
-    ... print i
-    ... yield a
-    >>> a, b, c = test()
+    def test():
+        for i in range(3):
+            def a():
+                 print i
+            yield a
+    a, b, c = test()
     70
     >>> a(), b(), c()
     2
